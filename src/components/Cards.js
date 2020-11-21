@@ -25,14 +25,16 @@ const useStyles = makeStyles((theme) => ({
         overflow: 'scroll',
         marginTop: '25px',
         '& p': {
-            fontSize: '12px'
+            fontSize: '12px',
+            margin: '3px 0px 5px 0px'
         },
         '& li': {
-            fontSize: '11px'
+            fontSize: '12px'
         },
         '& h5': {
             margin: '0'
         },
+        height: '260px',
     },
     ul: {
         textAlign: 'left',
