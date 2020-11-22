@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Radio, RadioGroup, FormControlLabel, Button, Typography, InputLabel, Select, MenuItem } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { valueFields, locationFields } from '../constants/constants';
 
 const useStyles = makeStyles((theme) => ({
     radioGroup: {
@@ -34,23 +35,13 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function SelectBy({ text, valueFields, locationFields }) {
+export default function SelectBy({ handleChangeRadio, handleChangeSelect, location, value }) {
     const classes = useStyles();
-    const [location, setLocation] = useState('all');
-    const [value, setValue] = useState(1);
-
-    const handleChangeRadio = (event) => {
-        setLocation(event.target.value);
-    };
-
-    const handleChangeSelect = (event) => {
-        setValue(event.target.value);
-    };
 
     const displayLocation  = () => {
         return locationFields.map(item => {
             return (
-                <FormControlLabel value="global" key={item.value} control={<Radio />} label={item.label} />
+                <FormControlLabel value={item.value} key={item.value} control={<Radio />} label={item.label} />
             )
         })
     }
