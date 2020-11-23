@@ -55,12 +55,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Cards({ banks }) {
     const classes = useStyles();
-    console.log('banks', banks)
 
     const Card = ({ bank }) => {
         return (
             <div className={classes.root} >
-            <img className={classes.logo} alt="logo" src="/logos/dbs.png" />
+            <img className={classes.logo} alt="logo" src="logos/dbs.png" />
             <div className={classes.box}>
                 <div className={classes.info} >
                     <h5>{bank.Bank}</h5>
