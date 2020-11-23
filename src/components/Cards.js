@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import logo from './logos/dbs.png';
 
 const useStyles = makeStyles((theme) => ({
     root: {
