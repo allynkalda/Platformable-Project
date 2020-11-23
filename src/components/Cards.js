@@ -68,7 +68,7 @@ export default function Cards({ banks }) {
                         {bank.obValueType && <li>{bank.obValueType}</li>}
                         {bank.contentSummary && <li>{bank.contentSummary}</li>}
                     </ul>
-                    <a className={classes.link} href={bank.source}>More on source</a>
+                    <a className={classes.link} href={bank.source}>More in source</a>
                 </div>
             </div>
             </div>
