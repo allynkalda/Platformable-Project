@@ -64,7 +64,7 @@ export default function Cards({ banks }) {
             <div className={classes.box}>
                 <div className={classes.info} >
                     <h5>{bank.Bank}</h5>
-                    <p>{bank.Country} ({bank.region})</p>
+                    <p>{bank.Country} {bank.region !== 'UK' && `(${bank.region})`}</p>
                     <ul className={classes.ul}>
                         {bank.obValueType && <li>{bank.obValueType}</li>}
                         {bank.contentSummary && <li>{bank.contentSummary}</li>}
@@ -86,9 +86,7 @@ export default function Cards({ banks }) {
             const cards = banks && banks.map(item => <Card bank={item} />);
             return cards;
         }
-        console.log('chosen', chosen)
-
-      }
+    };
     
 
     return (
