@@ -1,5 +1,9 @@
 const valueFields = [
     {
+      value: 0,
+      label: 'None'
+    },
+    {
       value: 1,
       label: 'Portfolio enhancement and expansion'
     },

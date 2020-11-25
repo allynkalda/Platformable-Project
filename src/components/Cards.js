@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import Pagination from '@material-ui/lab/Pagination';
+import { Card } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -8,33 +10,9 @@ const useStyles = makeStyles((theme) => ({
         alignItems:'center',
         margin: '20px'
     },
-    box: {
-        border: '3px solid #04FDF6',
-        width: '200px',
-        height: '300px',
-        zIndex: '1',
-        borderRadius: '20px'
-    },
     logo: {
         width: '100px',
-        marginBottom: '-30px',
-        zIndex: '2'
-    },
-    info: {
-        color: '#200550',
-        overflow: 'scroll',
-        marginTop: '25px',
-        '& p': {
-            fontSize: '12px',
-            margin: '3px 0px 5px 0px'
-        },
-        '& li': {
-            fontSize: '12px'
-        },
-        '& h5': {
-            margin: '0'
-        },
-        height: '260px',
+        margin: '10px'
     },
     ul: {
         textAlign: 'left',
@@ -49,18 +27,46 @@ const useStyles = makeStyles((theme) => ({
     },
     page: {
         display: 'flex',
-        justifyContent: 'center'
-    }
+        justifyContent: 'center',
+        flexWrap: 'wrap'
+    },
+    button: {
+        margin: '30px',
+        minWidth: '200px'
+    },
+    media: {
+        height: 100,
+    },
+    card: {
+        width: 275,
+        margin: 20,
+        border: '5px solid #1b014c',
+        borderRadius: '30px'
+    },
+    info: {
+        color: '#200550',
+        overflow: 'scroll',
+        marginBottom: '25px',
+        '& p': {
+            fontSize: '12px',
+        },
+        '& li': {
+            fontSize: '12px'
+        },
+        '& h5': {
+            fontSize: '14px',
+            margin: '5px'
+        },
+        height: '260px',
+    },
 }));
 
-export default function Cards({ banks }) {
+export default function Cards({ banks, currentPage, setCurrentPage }) {
     const classes = useStyles();
-
-    const Card = ({ bank }) => {
+    const CardFormat = ({ bank }) => {
         return (
-            <div className={classes.root} >
-            <img className={classes.logo} alt="logo" src="logos/dbs.png" />
-            <div className={classes.box}>
+            <Card className={classes.card}>
+                <img className={classes.logo} alt="logo" src="logos/dbs.png" />
                 <div className={classes.info} >
                     <h5>{bank.Bank}</h5>
                     <p>{bank.Country} {bank.region !== 'UK' && `(${bank.region})`}</p>
@@ -70,22 +76,59 @@ export default function Cards({ banks }) {
                     </ul>
                     <a className={classes.link} href={bank.source}>More in source</a>
                 </div>
-            </div>
+            </Card>
+        )
+    };
+    
+    const handlePageClick = (event, value) => {
+        setCurrentPage(value);
+    }
+
+    const PER_PAGE = 6;
+    const offset = currentPage * PER_PAGE;
+    console.log('jsjs', banks
+        .slice(offset, offset + PER_PAGE))
+    
+    const currentPageData = () => {
+        if (banks.length <= 6) {
+            return banks.map((item) => {
+                return (
+                    <CardFormat bank={item} />
+                )
+            });
+        } else {
+            return banks
+            .slice(offset, offset + PER_PAGE)
+            .map((item) => {
+                return (
+                    <CardFormat bank={item} />
+                )
+            });
+        }
+    }
+
+    const pageCount = Math.floor(banks.length / PER_PAGE);
+    console.log('banks', banks)
+    console.log('pageCount', pageCount)
+
+    const showCards = () => {
+
+        return (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                <div style={{ display: 'flex' , flexWrap: 'wrap', justifyContent: 'center'}}>
+                    {currentPageData()}
+                </div>
+                {pageCount <= 1 ? '' :
+                    <Pagination 
+                        page={currentPage}
+                        count={pageCount}
+                        ariant="outlined" color="primary"
+                        onChange={handlePageClick} />
+                }
             </div>
         )
     };
-
-    const showCards = () => {
-        let chosen;
-        if (banks.length && banks.length > 3) {
-          chosen = banks.splice(0, 3);
-          const cards = chosen && chosen.map(item => <Card bank={item} />);
-          return cards;
-        } else {
-            const cards = banks && banks.map(item => <Card bank={item} />);
-            return cards;
-        }
-    };
+    
     
 
     return (
