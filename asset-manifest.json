@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Platformable-Project/static/css/main.3ba84fd5.chunk.css",
-    "main.js": "/Platformable-Project/static/js/main.03efa563.chunk.js",
-    "main.js.map": "/Platformable-Project/static/js/main.03efa563.chunk.js.map",
+    "main.js": "/Platformable-Project/static/js/main.c9e5902b.chunk.js",
+    "main.js.map": "/Platformable-Project/static/js/main.c9e5902b.chunk.js.map",
     "runtime-main.js": "/Platformable-Project/static/js/runtime-main.a2910d2e.js",
     "runtime-main.js.map": "/Platformable-Project/static/js/runtime-main.a2910d2e.js.map",
     "static/js/2.40d3fc2a.chunk.js": "/Platformable-Project/static/js/2.40d3fc2a.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.a2910d2e.js",
     "static/js/2.40d3fc2a.chunk.js",
     "static/css/main.3ba84fd5.chunk.css",
-    "static/js/main.03efa563.chunk.js"
+    "static/js/main.c9e5902b.chunk.js"
   ]
 }
