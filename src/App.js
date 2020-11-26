@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const classes = useStyles();
   const [ location, setLocation ] = useState('all');
-  const [ value, setValue ] = useState(1);
+  const [ value, setValue ] = useState(6);
   const [ filtered, setFiltered ] = useState([]);
   const [ currentPage, setCurrentPage ] = useState(1);
 
@@ -42,8 +42,6 @@ function App() {
 
   const filter = () => {
     let filteredData;
-    console.log(value)
-    console.log(location)
    
       switch(location) {
         case 'europe':
@@ -83,7 +81,6 @@ function App() {
 
   useEffect(() => {
     filter();
-    console.log('mdm')
   }, [ location, value ])
 
   return (

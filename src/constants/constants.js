@@ -1,6 +1,6 @@
 const valueFields = [
     {
-      value: 0,
+      value: 6,
       label: 'None'
     },
     {
