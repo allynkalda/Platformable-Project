@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Radio, RadioGroup, FormControlLabel, Button, Typography, InputLabel, Select, MenuItem } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { valueFields, locationFields } from '../constants/constants';
+import { valueFields, locationFields, bankFields } from '../constants/constants';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        color: '#4F4F4F'
+        color: '#4F4F4F',
+        display: 'flex',
+        justifyContent: 'space-around'
     },
     radioGroup: {
         textAlign: 'center',
@@ -17,8 +19,7 @@ const useStyles = makeStyles((theme) => ({
     radioBox: {
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
-        paddingTop: '30px'
+        alignItems: 'center'
     },
     selectGroup: {
         fontSize: '14px',
@@ -43,14 +44,23 @@ const useStyles = makeStyles((theme) => ({
     },
     checked: {
         color: '#707070'
+    },
+    fieldsBox: {
+        display: 'flex',
+        alignItems: 'flex-start'
+    },
+    fieldColumn: {
+        display: 'flex',
+        flexDirection: 'column',
+        paddingLeft: '2rem'
     }
 }));
 
-export default function SelectBy({ handleChangeRadio, handleChangeSelect, location, value }) {
+export default function SelectBy({ handleChangeLocation, handleChangeSelect, handleChangeBank, location, valueProp, bankType }) {
     const classes = useStyles();
 
-    const displayLocation  = () => {
-        return locationFields.map(item => {
+    const displayFields  = (fieldsArray) => {
+        return fieldsArray.map(item => {
             return (
                 <FormControlLabel value={item.value} key={item.value} control={<Radio classes={{root: classes.radio, checked: classes.checked}} />} color="secondary" label={item.label} />
             )
@@ -64,30 +74,44 @@ export default function SelectBy({ handleChangeRadio, handleChangeSelect, locati
         })
     };
 
+    console.log('selectBy', valueProp)
+    const menuAll = <FormControlLabel value={"all"} key={"all"} control={<Radio classes={{root: classes.radio, checked: classes.checked}} />} color="secondary" label={"All"} />
+
     return (
         <div className={classes.root}>
             <div className={classes.radioBox}>
                 <Typography className={classes.radioLabel} variant="body1">Select a region of the world</Typography>
-                <RadioGroup aria-label="location" name="location" value={location} onChange={handleChangeRadio} className={classes.radioGroup}>
-                    {displayLocation()}
+                <RadioGroup aria-label="location" name="location" value={location} onChange={handleChangeLocation} className={classes.radioGroup}>
+                    <div className={classes.fieldsBox}>
+                        {menuAll}
+                        <div className={classes.fieldColumn}>
+                            {displayFields(locationFields)}
+                        </div>
+                    </div>
                 </RadioGroup>
             </div>
-            <div className={classes.selectBox}>
-                <InputLabel id="value" className={classes.label}>Select the type of value example</InputLabel>
-                <Select
-                labelId="value"
-                id="value"
-                value={value}
-                onChange={handleChangeSelect}
-                className={classes.selectGroup}
-                autoWidth
-                >
-                    {displayValueFields()}
-                </Select>
+            <div className={classes.radioBox}>
+                <Typography className={classes.radioLabel} variant="body1">Select the type of bank</Typography>
+                <RadioGroup aria-label="bank" name="bank" value={bankType} onChange={handleChangeBank} className={classes.radioGroup}>
+                    <div className={classes.fieldsBox}>
+                        {menuAll}
+                        <div className={classes.fieldColumn}>
+                            {displayFields(bankFields)}
+                        </div>
+                    </div>
+                </RadioGroup>
             </div>
-            <Button className={classes.button} variant="contained" color="primary">
-                Search
-            </Button>   
+            <div className={classes.radioBox}>
+                <Typography className={classes.radioLabel} variant="body1">Select the type of value example</Typography>
+                <RadioGroup aria-label="value" name="value" value={valueProp} onChange={handleChangeSelect} className={classes.radioGroup}>
+                    <div className={classes.fieldsBox}>
+                        <FormControlLabel value={6} key={"all"} control={<Radio classes={{root: classes.radio, checked: classes.checked}} />} color="secondary" label={"All"} />
+                        <div className={classes.fieldColumn}>
+                            {displayFields(valueFields)}
+                        </div>
+                    </div>
+                </RadioGroup>
+            </div> 
       </div>
     )
 }

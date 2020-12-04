@@ -12,7 +12,7 @@ export default function Table() {
     const classes = useStyles();
     return (
         <div>
-            <img  className={classes.root} src="images/table.png" alt="table" />
+            <img  className={classes.root} src={process.env.PUBLIC_URL + "/images/table.png"} alt="table" />
         </div>
     )
 }
