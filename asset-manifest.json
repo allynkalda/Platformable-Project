@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/Platformable-Project/static/css/main.3ba84fd5.chunk.css",
-    "main.js": "/Platformable-Project/static/js/main.305066fc.chunk.js",
-    "main.js.map": "/Platformable-Project/static/js/main.305066fc.chunk.js.map",
-    "runtime-main.js": "/Platformable-Project/static/js/runtime-main.a2910d2e.js",
-    "runtime-main.js.map": "/Platformable-Project/static/js/runtime-main.a2910d2e.js.map",
-    "static/js/2.40d3fc2a.chunk.js": "/Platformable-Project/static/js/2.40d3fc2a.chunk.js",
-    "static/js/2.40d3fc2a.chunk.js.map": "/Platformable-Project/static/js/2.40d3fc2a.chunk.js.map",
-    "static/js/3.46bdf9f1.chunk.js": "/Platformable-Project/static/js/3.46bdf9f1.chunk.js",
-    "static/js/3.46bdf9f1.chunk.js.map": "/Platformable-Project/static/js/3.46bdf9f1.chunk.js.map",
+    "main.css": "/Platformable-Project/static/css/main.0c4298e3.chunk.css",
+    "main.js": "/Platformable-Project/static/js/main.923a8cea.chunk.js",
+    "main.js.map": "/Platformable-Project/static/js/main.923a8cea.chunk.js.map",
+    "runtime-main.js": "/Platformable-Project/static/js/runtime-main.87520924.js",
+    "runtime-main.js.map": "/Platformable-Project/static/js/runtime-main.87520924.js.map",
+    "static/js/2.555f3d1d.chunk.js": "/Platformable-Project/static/js/2.555f3d1d.chunk.js",
+    "static/js/2.555f3d1d.chunk.js.map": "/Platformable-Project/static/js/2.555f3d1d.chunk.js.map",
+    "static/js/3.6308cf86.chunk.js": "/Platformable-Project/static/js/3.6308cf86.chunk.js",
+    "static/js/3.6308cf86.chunk.js.map": "/Platformable-Project/static/js/3.6308cf86.chunk.js.map",
     "index.html": "/Platformable-Project/index.html",
-    "static/css/main.3ba84fd5.chunk.css.map": "/Platformable-Project/static/css/main.3ba84fd5.chunk.css.map",
-    "static/js/2.40d3fc2a.chunk.js.LICENSE.txt": "/Platformable-Project/static/js/2.40d3fc2a.chunk.js.LICENSE.txt"
+    "static/css/main.0c4298e3.chunk.css.map": "/Platformable-Project/static/css/main.0c4298e3.chunk.css.map",
+    "static/js/2.555f3d1d.chunk.js.LICENSE.txt": "/Platformable-Project/static/js/2.555f3d1d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.a2910d2e.js",
-    "static/js/2.40d3fc2a.chunk.js",
-    "static/css/main.3ba84fd5.chunk.css",
-    "static/js/main.305066fc.chunk.js"
+    "static/js/runtime-main.87520924.js",
+    "static/js/2.555f3d1d.chunk.js",
+    "static/css/main.0c4298e3.chunk.css",
+    "static/js/main.923a8cea.chunk.js"
   ]
 }
