@@ -105,6 +105,7 @@ function App() {
         default:
           filteredData = filteredData;
       };
+      setFiltered(filteredData);
   };
 
   useEffect(() => {
