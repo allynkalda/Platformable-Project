@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     },
     card: {
         width: '40vw',
-        height: '30vh',
+        height: '40vh',
         margin: 20,
         border: '3px solid #1b014c',
         borderRadius: '30px',
@@ -63,8 +63,8 @@ const useStyles = makeStyles((theme) => ({
         overflow: 'scroll',
         alignItems: 'center',
         width: '60%',
-        minHeight: '250px',
-        maxHeight: '250px'
+        minHeight: '35vh',
+        maxHeight: '35vh'
     },
     center: {
         justifyContent: 'center',
