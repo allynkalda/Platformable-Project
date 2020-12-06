@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Pagination from '@material-ui/lab/Pagination';
 import { Card } from '@material-ui/core';
 import { valueFields } from '../constants/constants';
+import clsx from 'clsx';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -14,12 +15,6 @@ const useStyles = makeStyles((theme) => ({
     logo: {
         width: '100px',
         margin: '10px'
-    },
-    link: {
-        fontSize: '10px',
-        lineHeight: '1',
-        display: 'inline-box',
-        color: '#CCBDED'
     },
     page: {
         paddingTop: 40,
@@ -39,9 +34,12 @@ const useStyles = makeStyles((theme) => ({
     },
     card: {
         width: '40vw',
+        height: '30vh',
         margin: 20,
-        border: '5px solid #1b014c',
-        borderRadius: '30px'
+        border: '3px solid #1b014c',
+        borderRadius: '30px',
+        padding: 20,
+        position: 'relative'
     },
     cardsBox: {
         display: 'flex' ,
@@ -50,32 +48,51 @@ const useStyles = makeStyles((theme) => ({
         width: '100%'
     },
     contentBox: {
-        display: 'flex',
-        padding: 20
+        display: 'flex'
     },
     infoContent: {
         display: 'flex',
         flexDirection: 'column',
-        width: '50%',
-        justifyContent: 'center',
+        paddingTop: '50px',
+        width: '40%',
         alignItems: 'center'
-    }
+    },
+    info: {
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'scroll',
+        alignItems: 'center',
+        width: '60%',
+        minHeight: '250px',
+        maxHeight: '250px'
+    },
+    center: {
+        justifyContent: 'center',
+    },
+    link: {
+        fontSize: '10px',
+        lineHeight: '1',
+        color: '#CCBDED',
+        bottom: 0
+    },
 }));
 
 export default function GridBox({ banks, currentPage, setCurrentPage, valueProp }) {
     const classes = useStyles();
 
     const showLabelInfo = () => {
-        console.log('lab', valueProp)
         if (valueProp !== 6) {
-            return valueFields.filter(item => item.value === valueProp)[0].label;
+            return (
+                <div style={{ padding: '10px', margin: '10px 0 15px 0', backgroundColor: '#1C014C', color: 'white', borderRadius: '5px'}}>
+                    <p className="sub">{valueFields.filter(item => item.value === valueProp)[0].label}</p>
+                </div>
+            )
         }
     };
 
     const showContentInfo = (bank) => {
         if (valueProp !== 6) {
             const dataName = valueFields.filter(item => item.value === valueProp)[0].dataName;
-            console.log('dataName', bank[dataName])
             return bank && bank[dataName].map(item => {
                 return (
                     <p>{item.content}</p>
@@ -92,15 +109,15 @@ export default function GridBox({ banks, currentPage, setCurrentPage, valueProp 
                 <div className={classes.contentBox}>
                     <div className={classes.infoContent}>
                         <img className={classes.logo} alt="logo" src={process.env.PUBLIC_URL + `/images/${bank.logo}.png`} />
-                        <h5>{bank.stakeholderOrgName}</h5>
-                        <p>{bank.stakeholderRegion} {bank.bankType}</p>
+                        <h5>{bank.stakeholderRegion}</h5>
+                        <p>({bank.bankType})</p>
                     </div>
-                    <div className={classes.info} >
-                        <p>{showLabelInfo()}</p>
+                    <div className={clsx(classes.info, valueProp === 6 && classes.center)} >
+                        {showLabelInfo()}
                         {showContentInfo(bank)}
                     </div>
                 </div>
-                <a className={classes.link} href={bank.source}>More in source</a>
+                <a className={classes.link} href={bank.source[0].link} target="_blank" rel="noreferrer">More in source</a>
             </Card>
         )
     };
@@ -111,8 +128,6 @@ export default function GridBox({ banks, currentPage, setCurrentPage, valueProp 
 
     const PER_PAGE = 6;
     const offset = currentPage * PER_PAGE;
-    console.log('jsjs', banks
-        .slice(offset, offset + PER_PAGE))
     
     const currentPageData = () => {
         if (banks.length <= 6) {
@@ -133,8 +148,6 @@ export default function GridBox({ banks, currentPage, setCurrentPage, valueProp 
     }
 
     const pageCount = Math.floor(banks.length / PER_PAGE);
-    console.log('banks', banks)
-    console.log('pageCount', pageCount) 
 
     return (
         <div className={classes.page}>

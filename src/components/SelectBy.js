@@ -7,7 +7,11 @@ const useStyles = makeStyles((theme) => ({
     root: {
         color: '#4F4F4F',
         display: 'flex',
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
+        padding: '3rem 0 5rem 0',
+        margin: '2rem',
+        border: '3px solid #1b014c',
+        borderRadius: '30px',
     },
     radioGroup: {
         textAlign: 'center',
@@ -66,15 +70,7 @@ export default function SelectBy({ handleChangeLocation, handleChangeSelect, han
             )
         })
     }
-    const displayValueFields = () => {
-        return valueFields.map(item => {
-            return (
-                <MenuItem value={item.value} key={item.value}>{item.label}</MenuItem>
-            )
-        })
-    };
 
-    console.log('selectBy', valueProp)
     const menuAll = <FormControlLabel value={"all"} key={"all"} control={<Radio classes={{root: classes.radio, checked: classes.checked}} />} color="secondary" label={"All"} />
 
     return (

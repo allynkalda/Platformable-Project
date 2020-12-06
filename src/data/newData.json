@@ -699,7 +699,7 @@
     },
     {
       "stakeholderOrgName": "Goldman Sachs",
-      "logo": "goldmanSachs",
+      "logo": "goldman",
       "stakeholderGroup": "Banks",
       "bankType": "Investment",
       "stakeholderCountry": "United States",
@@ -738,7 +738,7 @@
     },
     {
       "stakeholderOrgName": "Standard Chartered - UK",
-      "logo": "standardChartedUk",
+      "logo": "standardChartered",
       "stakeholderGroup": "Banks",
       "bankType": "Commercial",
       "stakeholderCountry": "UK",
@@ -861,7 +861,7 @@
     },
     {
       "stakeholderOrgName": "Standard Chartered - India",
-      "logo": "standardCharteredIndia",
+      "logo": "standardChartered",
       "stakeholderGroup": "Banks",
       "bankType": "Retail",
       "stakeholderCountry": "India",
