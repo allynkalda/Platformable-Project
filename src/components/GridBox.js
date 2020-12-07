@@ -75,6 +75,13 @@ const useStyles = makeStyles((theme) => ({
         color: '#CCBDED',
         bottom: 0
     },
+    labelInfo: {
+        padding: '0px 10px 10px 10px',
+        margin: '10px 0 15px 0',
+        backgroundColor: '#1C014C',
+        color: 'white',
+        borderRadius: '5px'
+    }
 }));
 
 export default function GridBox({ banks, currentPage, setCurrentPage, valueProp }) {
@@ -83,7 +90,7 @@ export default function GridBox({ banks, currentPage, setCurrentPage, valueProp 
     const showLabelInfo = () => {
         if (valueProp !== 6) {
             return (
-                <div style={{ padding: '10px', margin: '10px 0 15px 0', backgroundColor: '#1C014C', color: 'white', borderRadius: '5px'}}>
+                <div className={classes.labelInfo}>
                     <p className="sub">{valueFields.filter(item => item.value === valueProp)[0].label}</p>
                 </div>
             )
