@@ -176,7 +176,7 @@ export default function GridBox({ banks, currentPage, setCurrentPage, valueProp 
     const pageCount = Math.ceil(cards.length / PER_PAGE);
     
     const showCards = () => {
-        if (cards) {
+        if (cards.length) {
             if (cards.length <= 6) {
                 return cards.map((item) => {
                     return (
