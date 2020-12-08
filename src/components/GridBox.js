@@ -45,7 +45,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex' ,
         flexWrap: 'wrap',
         justifyContent: 'center',
-        width: '100%'
+        width: '100%',
+        paddingBottom: '2rem'
     },
     contentBox: {
         display: 'flex'
