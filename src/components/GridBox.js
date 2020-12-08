@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Pagination from '@material-ui/lab/Pagination';
 import { Card } from '@material-ui/core';
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         overflow: 'scroll',
-        alignItems: 'center',
+        alignItems: 'flex-end',
         width: '60%',
         minHeight: '35vh',
         maxHeight: '35vh'
@@ -77,56 +77,84 @@ const useStyles = makeStyles((theme) => ({
     },
     labelInfo: {
         padding: '0px 10px 10px 10px',
-        margin: '10px 0 15px 0',
+        margin: '10px 10px 15px 0',
         backgroundColor: '#1C014C',
         color: 'white',
         borderRadius: '5px'
+    },
+    error: {
+        display: 'flex',
+        alignItems: 'center',
+        height: '50vh'
     }
 }));
 
 export default function GridBox({ banks, currentPage, setCurrentPage, valueProp }) {
     const classes = useStyles();
 
-    const showLabelInfo = () => {
-        if (valueProp !== 6) {
-            return (
-                <div className={classes.labelInfo}>
-                    <p className="sub">{valueFields.filter(item => item.value === valueProp)[0].label}</p>
-                </div>
-            )
-        }
-    };
+    const [ cards, setCards ] = useState([]);
 
     const showContentInfo = (bank) => {
-        if (valueProp !== 6) {
-            const dataName = valueFields.filter(item => item.value === valueProp)[0].dataName;
+            const dataName = valueFields.filter(item => item.dataName in bank)[0].dataName;
             return bank && bank[dataName].map(item => {
-                return (
-                    <p>{item.content}</p>
-                )
+                return <p>{item.content}</p>
             })
-        } else {
-            return <p>{bank.contentSummary}</p>
-        }
     };
 
+    const infoLabel = (bank) => {
+        return valueFields.filter(item => item.dataName in bank)[0].label
+    }
+
     const CardFormat = ({ bank }) => {
-        return (
-            <Card className={classes.card}>
-                <div className={classes.contentBox}>
-                    <div className={classes.infoContent}>
-                        <img className={classes.logo} alt="logo" src={process.env.PUBLIC_URL + `/images/${bank.logo}.png`} />
-                        <h5>{bank.stakeholderRegion}</h5>
-                        <p>({bank.bankType})</p>
+       return (
+        <>
+                <Card className={classes.card}>
+                    <div className={classes.contentBox}>
+                        <div className={classes.infoContent}>
+                            <img className={classes.logo} alt="logo" src={process.env.PUBLIC_URL + `/images/${bank.logo}.png`} />
+                            <h5>{bank.stakeholderRegion}</h5>
+                            <p>({bank.bankType})</p>
+                        </div>
+                        <div className={clsx(classes.info)} >
+                        <div className={classes.labelInfo}>
+                            <p className="sub">{infoLabel(bank)}</p>
+                        </div>
+                            {showContentInfo(bank)}
+                        </div>
                     </div>
-                    <div className={clsx(classes.info, valueProp === 6 && classes.center)} >
-                        {showLabelInfo()}
-                        {showContentInfo(bank)}
-                    </div>
-                </div>
-                <a className={classes.link} href={bank.source[0].link} target="_blank" rel="noreferrer">More in source</a>
-            </Card>
-        )
+                    <a className={classes.link} href={bank.source[0].link} target="_blank" rel="noreferrer">More in source</a>
+                </Card>
+        </>
+    )}
+
+    const createObj = (array, bank, valueName, obj) => {
+            const newObj = {};
+            newObj.logo = bank.logo;
+            newObj.stakeholderRegion = bank.stakeholderRegion;
+            newObj.bankType = bank.bankType;
+            newObj.source = bank.source;
+            newObj[valueName] = obj[valueName];
+            array.push(newObj);
+    };
+
+    const processBankData = (array, bank) => {
+        bank.values && bank.values.forEach(item => {
+            if (valueProp === 6) {
+                valueFields.forEach(value => {
+                    if (value.dataName in item && item[value.dataName].length) createObj(array, bank, value.dataName, item);
+                })
+            } else if (valueProp === 1) {
+                if ('existingPortfolioEnhancement' in item && item['existingPortfolioEnhancement'].length) createObj(array, bank, 'existingPortfolioEnhancement', item);
+            } else if (valueProp === 2) {
+                if ('newPortfolioExpansion' in item && item['newPortfolioExpansion'].length) createObj(array, bank, 'newPortfolioExpansion', item);
+            } else if (valueProp === 3) {
+                if ('efficiencyEnhancement' in item && item['efficiencyEnhancement'].length) createObj(array, bank, 'efficiencyEnhancement', item);
+            } else if (valueProp === 4) {
+                if ('networkOptimisation' in item && item['networkOptimisation'].length) createObj(array, bank, 'networkOptimisation', item);
+            } else if (valueProp === 5) {
+                if ('enhanceFinancialPerformance' in item && item['enhanceFinancialPerformance'].length) createObj(array, bank, 'enhanceFinancialPerformance', item);
+            }
+        })
     };
     
     const handlePageClick = (event, value) => {
@@ -134,38 +162,58 @@ export default function GridBox({ banks, currentPage, setCurrentPage, valueProp 
     }
 
     const PER_PAGE = 6;
-    const offset = currentPage * PER_PAGE;
+    const offset = (currentPage - 1) * PER_PAGE;
     
-    const currentPageData = () => {
-        if (banks.length <= 6) {
-            return banks.map((item) => {
-                return (
-                    <CardFormat bank={item} />
-                )
-            });
+    const getCardsObject = () => {
+        const dataArray = [];
+        banks.forEach((item) => {
+            processBankData(dataArray, item)
+        })
+        setCards(dataArray)
+    }
+
+    const pageCount = Math.ceil(cards.length / PER_PAGE);
+    
+    const showCards = () => {
+        if (cards) {
+            if (cards.length <= 6) {
+                return cards.map((item) => {
+                    return (
+                        <CardFormat bank={item} />
+                    )
+                });
+            } else {
+                return cards
+                .slice(offset, offset + PER_PAGE)
+                .map((item) => {
+                    return (
+                        <CardFormat bank={item} />
+                    )
+                });
+            }
         } else {
-            return banks
-            .slice(offset, offset + PER_PAGE)
-            .map((item) => {
-                return (
-                    <CardFormat bank={item} />
-                )
-            });
+            return (
+                <div className={classes.error}>
+                    We don't currently have any evidence-based use cases that match your search criteria. Try filtering for "All" to expand your search parameters.
+                </div>
+            )
         }
     }
 
-    const pageCount = Math.floor(banks.length / PER_PAGE);
+    useEffect(() => {
+        getCardsObject();
+    }, [ banks ])
 
     return (
         <div className={classes.page}>
             <div className={classes.cardsBox}>
-                {currentPageData()}
+                {showCards()}
                 </div>
                 {pageCount <= 1 ? '' :
                     <Pagination 
                         page={currentPage}
                         count={pageCount}
-                        ariant="outlined" color="primary"
+                        variant="outlined" color="primary"
                         onChange={handlePageClick}
                     />
                 }
