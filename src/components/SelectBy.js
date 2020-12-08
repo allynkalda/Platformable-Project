@@ -1,5 +1,5 @@
 import React from 'react';
-import { Radio, RadioGroup, FormControlLabel, Button, Typography, InputLabel, Select, MenuItem } from '@material-ui/core';
+import { Radio, RadioGroup, FormControlLabel, Typography, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { valueFields, locationFields, bankFields } from '../constants/constants';
 
@@ -9,13 +9,13 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'space-around',
         padding: '3rem 0 5rem 0',
-        margin: '2rem',
-        border: '3px solid #1b014c',
-        borderRadius: '30px',
+        [theme.breakpoints.up('md')]: {
+            border: '3px solid #1b014c',
+            borderRadius: '30px',
+        },
     },
     radioGroup: {
-        textAlign: 'center',
-        width: '23vw'
+        textAlign: 'center'
     },
     radioLabel: {
         padding: '20px'
@@ -74,8 +74,8 @@ export default function SelectBy({ handleChangeLocation, handleChangeSelect, han
     const menuAll = <FormControlLabel value={"all"} key={"all"} control={<Radio classes={{root: classes.radio, checked: classes.checked}} />} color="secondary" label={"All"} />
 
     return (
-        <div className={classes.root}>
-            <div className={classes.radioBox}>
+        <Grid container className={classes.root}>
+            <Grid item sm={12} md={4} className={classes.radioBox}>
                 <Typography className={classes.radioLabel} variant="body1">Select a region of the world</Typography>
                 <RadioGroup aria-label="location" name="location" value={location} onChange={handleChangeLocation} className={classes.radioGroup}>
                     <div className={classes.fieldsBox}>
@@ -85,8 +85,8 @@ export default function SelectBy({ handleChangeLocation, handleChangeSelect, han
                         </div>
                     </div>
                 </RadioGroup>
-            </div>
-            <div className={classes.radioBox}>
+            </Grid>
+            <Grid item sm={12} md={4} className={classes.radioBox}>
                 <Typography className={classes.radioLabel} variant="body1">Select the type of bank</Typography>
                 <RadioGroup aria-label="bank" name="bank" value={bankType} onChange={handleChangeBank} className={classes.radioGroup}>
                     <div className={classes.fieldsBox}>
@@ -96,8 +96,8 @@ export default function SelectBy({ handleChangeLocation, handleChangeSelect, han
                         </div>
                     </div>
                 </RadioGroup>
-            </div>
-            <div className={classes.radioBox}>
+            </Grid>
+            <Grid item sm={12} md={4} className={classes.radioBox}>
                 <Typography className={classes.radioLabel} variant="body1">Select the type of value example</Typography>
                 <RadioGroup aria-label="value" name="value" value={valueProp} onChange={handleChangeSelect} className={classes.radioGroup}>
                     <div className={classes.fieldsBox}>
@@ -107,7 +107,7 @@ export default function SelectBy({ handleChangeLocation, handleChangeSelect, han
                         </div>
                     </div>
                 </RadioGroup>
-            </div> 
-      </div>
+            </Grid> 
+      </Grid>
     )
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Pagination from '@material-ui/lab/Pagination';
-import { Card } from '@material-ui/core';
+import { Card, Grid} from '@material-ui/core';
 import { valueFields } from '../constants/constants';
 import clsx from 'clsx';
 
@@ -33,8 +33,6 @@ const useStyles = makeStyles((theme) => ({
         height: 100,
     },
     card: {
-        width: '40vw',
-        height: '40vh',
         margin: 20,
         border: '3px solid #1b014c',
         borderRadius: '30px',
@@ -86,7 +84,8 @@ const useStyles = makeStyles((theme) => ({
     error: {
         display: 'flex',
         alignItems: 'center',
-        height: '50vh'
+        height: '50vh',
+        padding: '2rem'
     }
 }));
 
@@ -108,7 +107,7 @@ export default function GridBox({ banks, currentPage, setCurrentPage, valueProp 
 
     const CardFormat = ({ bank }) => {
        return (
-        <>
+            <Grid item sm={12} md={6}>
                 <Card className={classes.card}>
                     <div className={classes.contentBox}>
                         <div className={classes.infoContent}>
@@ -125,7 +124,7 @@ export default function GridBox({ banks, currentPage, setCurrentPage, valueProp 
                     </div>
                     <a className={classes.link} href={bank.source[0].link} target="_blank" rel="noreferrer">More in source</a>
                 </Card>
-        </>
+            </Grid>
     )}
 
     const createObj = (array, bank, valueName, obj) => {

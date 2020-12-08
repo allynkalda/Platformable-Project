@@ -9,8 +9,10 @@ import Table from './components/Table';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      padding: '3rem',
-      color: '#200550'
+      color: '#200550',
+      [theme.breakpoints.up('md')]: {
+        padding: '3rem',
+      },
     },
     select: {
       flex: 'flex',

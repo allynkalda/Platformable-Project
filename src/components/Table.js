@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -7,14 +8,15 @@ const useStyles = makeStyles((theme) => ({
         width: '100vw'
     },
     text: {
-        width: '50vw',
-        padding: '3rem 0 3rem 4rem'
+        padding: '3rem 2rem 3rem 4rem'
     },
     imageBox: {
-        width: '50vw'
+        [theme.breakpoints.down('sm')]: {
+            textAlign: 'center'
+        },
     },
     image: {
-        width: '70%',
+        width: '80%',
         paddingTop: '5rem',
         paddingBottom: '2rem'
     },
@@ -35,8 +37,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Table() {
     const classes = useStyles();
     return (
-        <div className={classes.root}>
-            <div className={classes.text}>
+        <Grid container className={classes.root}>
+            <Grid item sm={12} md={6} className={classes.text}>
                 <h1>Open Banking Value Tool:</h1>
                 <h1>What business value do APIs generate? </h1>
                 <p>When regulators and industry decide to move to an open banking approach, they do so because they believe that there are substantial benefits for fintech market entrants, consumers, businesses, the wider economy, and for banks themselves.</p>
@@ -49,10 +51,10 @@ export default function Table() {
                         <p>To learn more about our model or to provide feedback, check out our blog post: Introducing the Open Banking Value Tool.</p>
                     </div>
                 </div>
-            </div>
-            <div className={classes.imageBox}>
+            </Grid>
+            <Grid item sm={12} md={6} className={classes.imageBox} align="left">
                 <img className={classes.image} src={process.env.PUBLIC_URL + "/images/table.png"} alt="table" />
-            </div>
-        </div>
+            </Grid>
+        </Grid>
     )
 }
