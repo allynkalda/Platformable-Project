@@ -62,6 +62,10 @@ const valueFields = [
       value: 'private',
       label: 'Private'
     },
+    {
+      value: 'commercial',
+      label: 'Commercial'
+    }
   ]
 
 export { valueFields, locationFields, bankFields };

@@ -83,24 +83,27 @@ function App() {
         case 'private':
           filteredData = filteredData.filter(item => item.bankType === 'Commercial' || item.bankType === 'Investment' ||  item.bankType === 'Private');
           break;
+        case 'commercial':
+          filteredData = filteredData.filter(item => item.bankType === 'Commercial');
+          break;
         default:
           filteredData = filteredData;
       };
       switch(value) {
         case 1:
-          filteredData = filteredData.filter(item => item.existingPortfolioEnhancement.length);
+          filteredData = filteredData.filter(item => item.values.some(obj => obj.existingPortfolioEnhancement && obj.existingPortfolioEnhancement.length));
           break;
         case 2:
-          filteredData = filteredData.filter(item => item.newPortfolioExpansion.length);
+          filteredData = filteredData.filter(item => item.values.some(obj => obj.newPortfolioExpansion && obj.newPortfolioExpansion.length));
           break;
         case 3:
-          filteredData = filteredData.filter(item => item.efficiencyEnhancement.length);
+          filteredData = filteredData.filter(item => item.values.some(obj => obj.efficiencyEnhancement && obj.efficiencyEnhancement.length));
           break;
         case 4:
-          filteredData = filteredData.filter(item => item.networkOptimisation.length);
+          filteredData = filteredData.filter(item => item.values.some(obj => obj.networkOptimisation && obj.networkOptimisation.length));
           break;
         case 5:
-          filteredData = filteredData.filter(item => item.enhanceFinancialPerformance.length);
+          filteredData = filteredData.filter(item => item.values.some(obj => obj.enhanceFinancialPerformance && obj.enhanceFinancialPerformance.length));
           break;
         default:
           filteredData = filteredData;
